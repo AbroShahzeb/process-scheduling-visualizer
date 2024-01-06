@@ -1,5 +1,6 @@
 import { ganttChartInfoType } from "./index";
 
+// hey
 export const sjf = (arrivalTime, burstTime) => {
   const processesInfo = arrivalTime
     .map((item, index) => {
