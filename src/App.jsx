@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import styled from "styled-components";
+import Input from "./components/input/index";
+import Output from "./components/output/index";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { media } from "./components/GlobalStyles.css";
+import "./App.css";
+
+const Main = styled.main`
+  display: flex;
+  ${media["1050"]`flex-direction: column;`}
+  margin: 45px auto 1rem !important;
+  ${media["600"]`margin: 20px auto 1rem !important`};
+  gap: clamp(0.5rem, 2.5vw, 4rem);
+  ${media["1050"]`gap: 0.75rem`};
+  margin: 0 100px;
+`;
+
+export default function Home() {
+  const [selectedAlgo, setSelectedAlgo] = useState(null);
+  const [arrivalTime, setArrivalTime] = useState([]);
+  const [burstTime, setBurstTime] = useState([]);
+  const [timeQuantum, setTimeQuantum] = useState();
+  const [priorities, setPriorities] = useState([]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className='container'>
+      <Main>
+        <Input
+          selectedAlgo={selectedAlgo}
+          setSelectedAlgo={setSelectedAlgo}
+          setArrivalTime={setArrivalTime}
+          setBurstTime={setBurstTime}
+          setTimeQuantum={setTimeQuantum}
+          setPriorities={setPriorities}
+        />
+        <Output
+          selectedAlgo={selectedAlgo}
+          arrivalTime={arrivalTime}
+          burstTime={burstTime}
+          timeQuantum={timeQuantum}
+          priorities={priorities}
+        />
+      </Main>
+    </div>
+  );
 }
-
-export default App
