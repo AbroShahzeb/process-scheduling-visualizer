@@ -18,25 +18,12 @@ export const fcfs = (arrivalTime, burstTime) => {
     });
 
   let finishTime = [];
-  let ganttChartInfo = [];
 
   const solvedProcessesInfo = processesInfo.map((process, index) => {
     if (index === 0 || process.at > finishTime[index - 1]) {
       finishTime[index] = process.at + process.bt;
-
-      ganttChartInfo.push({
-        job: process.job,
-        start: process.at,
-        stop: finishTime[index],
-      });
     } else {
       finishTime[index] = finishTime[index - 1] + process.bt;
-
-      ganttChartInfo.push({
-        job: process.job,
-        start: finishTime[index - 1],
-        stop: finishTime[index],
-      });
     }
 
     return {
@@ -47,5 +34,5 @@ export const fcfs = (arrivalTime, burstTime) => {
     };
   });
 
-  return { solvedProcessesInfo, ganttChartInfo };
+  return { solvedProcessesInfo };
 };

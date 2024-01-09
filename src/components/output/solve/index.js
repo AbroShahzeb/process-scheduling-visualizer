@@ -26,14 +26,6 @@ export const solve = (
   }
 };
 
-export const ganttChartInfoType = [
-  {
-    job: "",
-    start: 0,
-    stop: 0,
-  },
-];
-
 export const solvedProcessesInfoType = [
   {
     job: "",

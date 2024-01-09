@@ -1,6 +1,3 @@
-import { ganttChartInfoType } from "./index";
-
-// hey
 export const sjf = (arrivalTime, burstTime) => {
   const processesInfo = arrivalTime
     .map((item, index) => {
@@ -19,7 +16,6 @@ export const sjf = (arrivalTime, burstTime) => {
     });
 
   let finishTime = [];
-  let ganttChartInfo = [];
 
   const solvedProcessesInfo = [];
   const readyQueue = [];
@@ -44,12 +40,6 @@ export const sjf = (arrivalTime, burstTime) => {
 
       readyQueue.shift();
       finishedJobs.push(processesInfo[0]);
-
-      ganttChartInfo.push({
-        job: processesInfo[0].job,
-        start: processesInfo[0].at,
-        stop: finishTime[0],
-      });
     } else {
       if (
         readyQueue.length === 0 &&
@@ -83,20 +73,8 @@ export const sjf = (arrivalTime, burstTime) => {
 
       if (processToExecute.at > previousFinishTime) {
         finishTime.push(processToExecute.at + processToExecute.bt);
-        const newestFinishTime = finishTime[finishTime.length - 1];
-        ganttChartInfo.push({
-          job: processToExecute.job,
-          start: processToExecute.at,
-          stop: newestFinishTime,
-        });
       } else {
         finishTime.push(previousFinishTime + processToExecute.bt);
-        const newestFinishTime = finishTime[finishTime.length - 1];
-        ganttChartInfo.push({
-          job: processToExecute.job,
-          start: previousFinishTime,
-          stop: newestFinishTime,
-        });
       }
 
       const newestFinishTime = finishTime[finishTime.length - 1];
@@ -136,5 +114,5 @@ export const sjf = (arrivalTime, burstTime) => {
     return 0;
   });
 
-  return { solvedProcessesInfo, ganttChartInfo };
+  return { solvedProcessesInfo };
 };

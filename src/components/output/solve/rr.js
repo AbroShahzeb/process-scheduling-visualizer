@@ -14,7 +14,6 @@ export const rr = (arrivalTime, burstTime, timeQuantum) => {
     });
 
   const solvedProcessesInfo = [];
-  const ganttChartInfo = [];
 
   const readyQueue = [];
   let currentTime = processesInfo[0].at;
@@ -44,24 +43,10 @@ export const rr = (arrivalTime, burstTime, timeQuantum) => {
       // Burst time less than or equal to time quantum, execute until finished
       const remainingT = remainingTime[processToExecute.job];
       remainingTime[processToExecute.job] -= remainingT;
-      const prevCurrentTime = currentTime;
       currentTime += remainingT;
-
-      ganttChartInfo.push({
-        job: processToExecute.job,
-        start: prevCurrentTime,
-        stop: currentTime,
-      });
     } else {
       remainingTime[processToExecute.job] -= timeQuantum;
-      const prevCurrentTime = currentTime;
       currentTime += timeQuantum;
-
-      ganttChartInfo.push({
-        job: processToExecute.job,
-        start: prevCurrentTime,
-        stop: currentTime,
-      });
     }
     const processToArriveInThisCycle = processesInfo.filter((p) => {
       return (
@@ -107,5 +92,5 @@ export const rr = (arrivalTime, burstTime, timeQuantum) => {
     return 0;
   });
 
-  return { solvedProcessesInfo, ganttChartInfo };
+  return { solvedProcessesInfo };
 };
